@@ -4,9 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
 
 public class QuenMK extends JFrame {
+
+    public void dong(){
+        this.setVisible(false);
+    }
     public QuenMK() {
         setResizable(false);
         this.setTitle("Shop thú cưng");
@@ -23,7 +29,7 @@ public class QuenMK extends JFrame {
 
         //tieu de
         JLabel lbTieuDe = new JLabel("QUÊN MẬT KHẨU");
-        lbTieuDe.setBounds(200, 20, 200, 35);
+        lbTieuDe.setBounds(180, 20, 200, 35);
         lbTieuDe.setFont(font1);
         lbTieuDe.setForeground(Color.RED);
         panel.add(lbTieuDe);
@@ -47,17 +53,17 @@ public class QuenMK extends JFrame {
 
         //mật khẩu
         JLabel lbMK = new JLabel("Mật khẩu:");
-        lbMK.setBounds(120, 130, 80, 25);
+        lbMK.setBounds(120, 140, 80, 25);
         lbMK.setFont(font2);
         JTextField txMK = new JTextField();
-        txTK.setBounds(200, 130, 200, 25);
-        txMK.setEnabled(false);
+        txMK.setBounds(200, 140, 200, 25);
+        txMK.setEditable(false);
         panel.add(lbMK);
         panel.add(txMK);
 
         //hien thong báo
         JLabel lbThongBao = new JLabel();
-        lbThongBao.setBounds(200, 130, 200, 25);
+        lbThongBao.setBounds(200, 180, 200, 25);
         lbThongBao.setFont(font3);
         lbThongBao.setForeground(Color.RED);
         panel.add(lbThongBao);
@@ -66,7 +72,7 @@ public class QuenMK extends JFrame {
         JButton jbtxacnhan = new JButton("Xác nhận");
         jbtxacnhan.setFont(font2);
         jbtxacnhan.setFocusable(false);//tat vien xung quanh button
-        jbtxacnhan.setBounds(200, 150, 90, 25);
+        jbtxacnhan.setBounds(200, 200, 90, 25);
         jbtxacnhan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,6 +107,28 @@ public class QuenMK extends JFrame {
 
             }
         });
+        JLabel lbBack = new JLabel("Quay lại trang chủ");
+        lbBack.setFont(font3);
+        lbBack.setBounds(2,2,100,25);
+        panel.add(lbBack);
+        lbBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dong();
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                lbBack.setForeground(Color.RED);
+            }
+        });
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                lbBack.setForeground(Color.BLACK);
+            }
+        });
+
+
         panel.add(jbtxacnhan);
         this.add(panel);
     }

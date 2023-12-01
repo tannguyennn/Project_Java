@@ -1,0 +1,50 @@
+DV01
+DV
+Salon
+100000
+
+DV02
+DV
+Vệ sinh thú cưng
+100000
+
+DV03
+DV
+Tiêm ngừa
+200000
+
+DV04
+DV
+Khám bệnh
+100000
+
+DV05
+SP
+Nhà mini
+100000
+98
+DV06
+SP
+Thức ăn tổng hợp
+50000
+167
+DV07
+SP
+Đệm ngủ
+75000
+78
+DV08
+SP
+Thuốc tiêu hóa
+25000
+196
+DV09
+SP
+Máy massage
+125000
+24
+DV10
+SP
+Gen dinh dưỡng
+23000
+87

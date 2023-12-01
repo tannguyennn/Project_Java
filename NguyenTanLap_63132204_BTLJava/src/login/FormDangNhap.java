@@ -4,10 +4,7 @@ import giaodienchinh.GiaoDien;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -59,26 +56,20 @@ public class FormDangNhap extends JFrame {
         lbquenmk.setFont(font3);
         lbquenmk.setForeground(Color.PINK);
 
-        lbquenmk.addMouseListener(new MouseListener() {
+        lbquenmk.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 new QuenMK().setVisible(true);
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
             @Override
             public void mouseEntered(MouseEvent e) {
+                lbquenmk.setForeground(Color.RED);
             }
-
+        });
+        panel.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseEntered(MouseEvent e) {
+                lbquenmk.setForeground(Color.BLACK);
             }
         });
         panel.add(lbquenmk);
@@ -105,16 +96,15 @@ public class FormDangNhap extends JFrame {
                 try {
                     BufferedReader in = new BufferedReader(new FileReader(fileName));
                     ms = in.readLine();
-                    taiKhoan = in.readLine();
-                    matKhau = in.readLine();
                     while (ms!=null) {
-
-                        if (tk.equals(taiKhoan) && mk.equals(matKhau)) {
-                            new GiaoDien().setVisible(true);
-                        }
-                        ms = in.readLine();
                         taiKhoan = in.readLine();
                         matKhau = in.readLine();
+                        if (tk.equals(taiKhoan) && mk.equals(matKhau)) {
+
+                           GiaoDien g = new GiaoDien(ms);
+                           g.setVisible(true);
+                        }
+                        ms = in.readLine();
                     }
                     in.close();
                     lbThongBao.setText("Tài khoản hoặc mật khẩu không đúng!!!");
