@@ -1,6 +1,7 @@
 package giaodienchinh;
 
 import javax.swing.*;
+import javax.swing.event.ListDataEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -469,8 +470,12 @@ public class GiaoDien extends JFrame {
         jpHoaDon.setLayout(null);
 
         JPanel pTrai = new JPanel();
-        pTrai.setBounds(150, 0, 100, 400);
+        pTrai.setBounds(100, 100, 100, 400);
         pTrai.setLayout(new GridLayout(10, 1, 5, 5));
+
+        JPanel pPhai = new JPanel();
+        pPhai.setBounds(250, 100, 100, 400);
+        pPhai.setLayout(new GridLayout(10, 1, 5, 5));
 
         JLabel lbNV = new JLabel("Nhân viên");
         JTextField txNV = new JTextField();
@@ -495,21 +500,24 @@ public class GiaoDien extends JFrame {
 
         pTrai.add(lbNV);
         pTrai.add(txNV);
-        pTrai.add(lbTG);
-        pTrai.add(txTG);
+        pPhai.add(lbTG);
+        pPhai.add(txTG);
         pTrai.add(cbKH);
-        pTrai.add(lbTenKH);
-        pTrai.add(txTenKh);
-        pTrai.add(lbSDT);
-        pTrai.add(txSDT);
+        pPhai.add(lbTenKH);
+        pPhai.add(txTenKh);
+        pPhai.add(lbSDT);
+        pPhai.add(txSDT);
 
+        jpHoaDon.add(pPhai);
         jpHoaDon.add(pTrai);
+
         String fileName = "khachhang.txt";
         String ma, ten, gtinh, sdt, slm;
         try {
             BufferedReader in = new BufferedReader(new FileReader(fileName));
             FileWriter writer = new FileWriter(fileName, true);
             ma = in.readLine();
+            cbKH.addItem(null);
             while (ma != null) {
                 cbKH.addItem(ma);
                 ten = in.readLine();
@@ -524,37 +532,54 @@ public class GiaoDien extends JFrame {
             System.out.println("Problem reading " + fileName);
         }
 
-        cbKH.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
+       cbKH.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               String fileName = "khachhang.txt";
+               String ma, ten, gtinh, sdt, slm;
+               try {
+                   BufferedReader in = new BufferedReader(new FileReader(fileName));
+                   FileWriter writer = new FileWriter(fileName, true);
+                   ma = in.readLine();
+                   while (ma != null) {
+                       ten = in.readLine();
+                       gtinh = in.readLine();
+                       sdt = in.readLine();
+                       slm = in.readLine();
+                       if(ma.equals(cbKH.getSelectedItem()))
+                       {
+                           txTenKh.setText(ten);
+                           txSDT.setText(sdt);
+                       }
+                       ma = in.readLine();
 
-                String fileName = "khachhang.txt";
-                String ma, ten, gtinh, sdt, slm;
-                try {
-                    BufferedReader in = new BufferedReader(new FileReader(fileName));
-                    FileWriter writer = new FileWriter(fileName, true);
-                    ma = in.readLine();
-                    while (ma != null) {
-                        ten = in.readLine();
-                        gtinh = in.readLine();
-                        sdt = in.readLine();
-                        slm = in.readLine();
-                        ma = in.readLine();
+                   }
+                   in.close();
+               } catch (IOException iox) {
+                   System.out.println("Problem reading " + fileName);
+               }
+           }
+       });
 
-                    }
-                    in.close();
-                } catch (IOException iox) {
-                    System.out.println("Problem reading " + fileName);
-                }
-            }
-        });
+        String[] columnNames = {"Mã sản phẩm", "Loại DV", "Tên dịch vụ", "Số lượng", "Giá"};
+        String[] row = new String[5];
 
+        JTable jTable = new JTable();
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columnNames);
+        jTable.setModel(model);
+        //jcrollpanel
+        JScrollPane sp = new JScrollPane();
+        sp.setBounds(350, 100, 400, 300);
+        sp.add(jTable);
+        sp.setViewportView(jTable);
+        jpHoaDon.add(sp);
 
     }
 
     public void panelTrangchu(){
         jpTrangchu.setVisible(true);
-        jpTrangchu.setBackground(Color.green);
+        jpTrangchu.setBackground(Color.blue);
         jpTrangchu.setLayout(null);
 
 
