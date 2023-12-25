@@ -1,10 +1,10 @@
 import giaodienchinh.GiaoDien;
 import login.FormDangNhap;
-import login.QuenMK;
 
 public class Main {
     public static void main(String[] args) {
-        FormDangNhap a = new FormDangNhap();
-
+      // FormDangNhap a = new FormDangNhap();
+        GiaoDien a = new GiaoDien("quanly");
+        a.setVisible(true);
     }
 }
